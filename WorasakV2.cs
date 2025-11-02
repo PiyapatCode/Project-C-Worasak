@@ -1,0 +1,594 @@
+using System;
+
+public class WorasakProject
+{
+    public static string InputData(){
+        ///////////////Get data from user input
+        string ChooseMenu = Console.ReadLine();
+         ///////////////Make it t upperText
+        string UpperText = ChooseMenu.ToUpper();
+        ///////////////DeleteSpace//////////
+        ///////////////Replace the space with empty
+        string ChooseMenuTrueValue = UpperText.Replace(" ", string.Empty);
+        ///////////////return value
+        return ChooseMenuTrueValue;
+    }
+    //////////////////This method show category menu that user input the value
+    public static void CategoryOrder(string CategoryName,string[] ArrayCategory,int[] ArrayPriceCategory,int[] ArrayStockCategory){
+        
+        Console.WriteLine();
+        ////////////////////////Get data from user CategoryName and put it in below line
+        Console.WriteLine($" __________________{CategoryName} MENU__________________");
+        Console.WriteLine("                                             ");
+        //////////////////////LOOP to get data from Array
+        for (int i = 0; i < ArrayCategory.Length; i++)
+        {
+        /////////////////////i+1 because forloop start from 0 
+        Console.WriteLine($"   {i + 1}.{ArrayCategory[i].PadRight(15)}{ArrayPriceCategory[i]} BAHT{"".PadRight(8)}STOCK: {ArrayStockCategory[i]}{"".PadRight(2)}");}
+        Console.WriteLine("                                             ");
+        Console.WriteLine($"      Please choose {CategoryName} to continue -=-");
+        Console.WriteLine("_____________________________________________");
+        Console.WriteLine();
+        Console.Write("Choose Menu to order(Number or Text) : ");
+    }
+    public static void OrderMenuState1(string[] CategoryArray,int[] CategoryPrice,int[] CategoryStock,int checkname){
+         Console.WriteLine(" _________________ORDER MENU__________________");
+         Console.WriteLine("                                             ");
+         Console.WriteLine($"         YOUR ORDER IS {CategoryArray[checkname].PadRight(22)}");
+       
+         Console.WriteLine($"   STOCK : {CategoryStock[checkname]}{"".PadRight(33)}");
+         Console.WriteLine($"   PRICE : {CategoryPrice[checkname]} BAHT{"".PadRight(27)}");
+         Console.WriteLine("   AMOUNT: CHOOSE AMOUNT                     ");
+         Console.WriteLine("                                             ");
+         Console.WriteLine("_____________________________________________");
+         Console.WriteLine();
+///////////////////////////ENTER AMOUNT TO ORDER ////////////////////
+         Console.Write("ENTER AMOUNT TO ORDER : ");
+    }
+    public static void OrderMenuState2(string[] CategoryArray,int[] CategoryPrice,int[] CategoryStock,int checkname,int amount){
+         Console.WriteLine();
+         Console.WriteLine(" _________________ORDER MENU__________________");
+         Console.WriteLine("                                             ");
+         Console.WriteLine($"         YOUR ORDER IS {CategoryArray[checkname].PadRight(22)}");
+         Console.WriteLine("                                             ");
+         Console.WriteLine($"   PRICE : {CategoryPrice[checkname]} BAHT{"".PadRight(27)}");
+         Console.WriteLine($"   AMOUNT : {amount}{"".PadRight(32)}");
+         Console.WriteLine("                                             ");
+         Console.WriteLine($"             TOTAL PRICE: {amount * CategoryPrice[checkname]} BAHT{"".PadRight(12)}");
+        Console.WriteLine("_____________________________________________");
+        Console.WriteLine();
+        Console.WriteLine(" ___________________PAYMENT __________________");
+        Console.WriteLine("                                             ");
+        Console.WriteLine($" TOTAL PRICE: {amount * CategoryPrice[checkname]} BAHT{"".PadRight(24)}");
+        Console.Write($" ENTER YOUR MONEY : ");
+    }
+    public static void ChangeBill(int[] PriceArray,int moneyPay,int amount,int checkname){
+        int  moneyFoodChange = moneyPay-amount*PriceArray[checkname];
+        Console.WriteLine($" CHANGE : {moneyFoodChange}{"".PadRight(34)}");
+        Console.WriteLine($" HUNDRED BANKNOTE : {moneyFoodChange/100}{"".PadRight(24)}");
+        moneyFoodChange %= 100;
+        Console.WriteLine($" FIFTY   BANKNOTE : {moneyFoodChange/50}{"".PadRight(24)}");
+        moneyFoodChange %= 50;
+        Console.WriteLine($" TWENTY  BANKNOTE : {moneyFoodChange/20}{"".PadRight(24)}");
+        moneyFoodChange %=20;
+        Console.WriteLine($" TEN     COINS    : {moneyFoodChange/10}{"".PadRight(24)}");
+        moneyFoodChange %=10;
+        Console.WriteLine($" ONE     COINS    : {moneyFoodChange/1}{"".PadRight(24)}");
+        Console.WriteLine("                             PAYMENT SUCESS! ");
+    }
+    public static void NoEnoughMoney(){
+     Console.WriteLine("                                             ");
+     Console.WriteLine("        YOU DON'T HAVE ENOUGH MONEY          ");
+     }
+    public static void NoStock(){
+    Console.WriteLine("|============================================|");
+    Console.WriteLine("|          INSUFFICIENT STOCK QUANTITY       |");
+    Console.WriteLine("|                 BACK TO MENU               |");
+    
+    Console.WriteLine("|____________________________________________|");
+    }
+    public static void SomethingWrong(){
+        
+    Console.WriteLine();
+    Console.WriteLine("             SOME THING WAS WRONG              ");
+    Console.WriteLine();
+    Console.WriteLine(" _____________________________________________ ");
+    Console.WriteLine("|                                             |");
+    Console.WriteLine("|                 BACK TO MENU                |");
+    Console.WriteLine("|                                             |");
+    Console.WriteLine("|_____________________________________________|");
+    Console.WriteLine();
+    }
+    public static void ListCategory(string Category,string[] ArrayCategory,int[] ArrayPrice,int[] StockArray){
+    Console.WriteLine();
+    Console.WriteLine($" __________________{Category} MENU__________________");
+    Console.WriteLine("                                             ");
+    /////////////////////////////LOOP TO GET DATA FROM ARRAY
+    for (int i = 0; i < ArrayCategory.Length; i++)
+    {
+     Console.WriteLine($"   {i + 1}.{ArrayCategory[i].PadRight(15)}{ArrayPrice[i]} BAHT{"".PadRight(8)}STOCK: {StockArray[i]}{"".PadRight(2)}");}
+
+    Console.WriteLine("                                             ");
+    Console.WriteLine("      Enter Any key to go Back       -=-     ");
+    Console.WriteLine("_____________________________________________");
+    Console.WriteLine();
+    Console.Write("Enter Any key to continue : ");
+    }
+    public static void AdminStateShowCategory(string[] CategoryArray,int[] StockArray){
+    Console.WriteLine(" ___________________________________ADMIN_____________________________________ ");
+    Console.WriteLine("                                                                             ");
+    Console.WriteLine("                                   STOCK                                     ");
+    for(int i=0;i<CategoryArray.Length;i++){
+    Console.WriteLine($"         {i+1}.{CategoryArray[i].PadRight(50)} x{StockArray[i]}");
+     }
+    Console.WriteLine(" -----------------------------------------------------------------------------");
+    Console.WriteLine("|                                  COMMAND                                    |");
+    Console.WriteLine("|   - select     - Select menu to edit the stock                              |");
+    Console.WriteLine("|   - back       - Back to previous page                                      |");
+    Console.WriteLine("|   - exit       - Exit ADMIN PAGE                                            |");
+    Console.WriteLine("|                                                                             |");
+    Console.WriteLine("|                                                                             |");
+    Console.WriteLine("|_____________________________________________________________________________|");
+    Console.WriteLine();
+    Console.Write("Enter command : ");
+}
+    public static void AdminStategoto_select(string Category,string[] CategoryArray,int[] StockArray){
+    Console.WriteLine(" ____________________________________SELECT___________________________________ ");
+    Console.WriteLine("");
+    Console.Write($"       SELECT {Category}       : ");
+    int checkSelectMenu = 0;
+    try{
+    string SelectEditMenu = Console.ReadLine().Replace(" ",string.Empty).ToUpper();
+    checkSelectMenu = Array.IndexOf(CategoryArray,SelectEditMenu);
+    Console.WriteLine($"       YOU SELECT        : {CategoryArray[checkSelectMenu]}");
+    if(SelectEditMenu == CategoryArray[checkSelectMenu]){
+    Console.Write("       EDIT STOCK AMOUNT : ");
+    int EditAdminMenu = Convert.ToInt32(Console.ReadLine());
+    if(EditAdminMenu >=0){
+    StockArray[checkSelectMenu] = EditAdminMenu;
+    Console.WriteLine();
+    Console.WriteLine("       CHANGE SUCCESS");
+    Console.WriteLine(" _____________________________________________________________________________ ");
+
+    }else{
+
+    Console.WriteLine(" _____________________________________________________________________________ ");
+    Console.WriteLine();
+    Console.WriteLine("Something Invaild");
+    }
+ }
+}catch(Exception){
+    Console.WriteLine(" _____________________________________________________________________________ ");
+    Console.WriteLine();
+    Console.WriteLine("Something Invaild");
+ }
+    }
+    public static void BackToMenu(){
+    Console.WriteLine(" _____________________________________________ ");
+    Console.WriteLine("|                                             |");
+    Console.WriteLine("|                 BACK TO MENU                |");
+    Console.WriteLine("|                                             |");
+    Console.WriteLine("|_____________________________________________|");
+    Console.WriteLine();
+    }
+    
+    public static int checkposition(string TrueChooseValue,string[] CategoryArray){
+    int checkname = 0;
+    /////////////DECLARE VALUE FOR CHECK VALUE
+    int intValue;
+    //////////////////////////////CHECK VALUE CAN TURN INTO INT?////////////
+    bool canConvert = int.TryParse(TrueChooseValue, out intValue);
+    //When user input the value this state will check that value length more than 1 and cannot convert to int that mean that is not number and check that value is not null
+    if (TrueChooseValue.Length > 1 && !canConvert && TrueChooseValue != null)
+    {
+    //Find the number position by find the text that look like the value user input if that two value is equal store the number position in to checkname
+    checkname = Array.IndexOf(CategoryArray, TrueChooseValue);
+    }
+    //When user input can convert to number and not null value do this if
+    else if (canConvert && TrueChooseValue != null)
+    {
+    //Convert value to int and minus 1, store it to checkname
+    //The reason because when user input user see the choice 1 2 3 and the position index start with 0 1 2 that not equal the choice so we need to minus 1 to make the value user input equal to position index
+    checkname = Convert.ToInt32(TrueChooseValue) - 1;
+    }
+    return checkname;
+}
+public static void CategoryChoice(string NameCategory,string[] CategoryArray,int[] PriceArray,int[] StockArray){
+    
+    //CategoryOrder(string CategoryName,string[] ArrayCategory,int[] ArrayPriceCategory,int[] ArrayStockCategory)
+///USE METHOD 
+//INTERFACE Show list menu
+CategoryOrder(NameCategory,CategoryArray,PriceArray,StockArray);
+/////////////////// GET VALUE FROM METHOD//////////////////////////
+string TrueChooseValue = InputData();
+///////////////////////////// USE TRY CATCH FOR MANAGE ANY ERROR
+try
+{
+//Use Method to find position that user input with array
+int checkname=checkposition(TrueChooseValue,CategoryArray);
+
+//// SPACE LINE
+Console.WriteLine();
+//Check the value that equal with Food array Or Value minus 1 equal position index
+if (TrueChooseValue == CategoryArray[checkname] || Convert.ToInt32(TrueChooseValue) - 1 == checkname)
+
+{
+//////////////////declare variable to get the amount user input 
+int amountOrder = 0;
+//INTERFACE User choose amount
+////OrderMenuState1(string[] CategoryArray,int[] CategoryPrice,int[] CategoryStock,int checkname)
+//Use Method to show the result user choose
+OrderMenuState1(CategoryArray,PriceArray,StockArray,checkname);
+
+    //get value from user and convert to int ,enter amount to order
+amountOrder = Convert.ToInt32(Console.ReadLine().Replace(" ", string.Empty));
+    ///////////////////INTERFACE TOTAL RESULT///////////////////////////
+    //Check the amount user input more than 0 and less or equal STOCK 
+    if (amountOrder > 0 && amountOrder <= StockArray[checkname]){
+ //OrderMenuState2(string[] CategoryArray,int[] CategoryPrice,int[] CategoryStock,int checkname,int amount
+ //show the total price that user order
+ OrderMenuState2(CategoryArray,PriceArray,StockArray,checkname,amountOrder);
+     //user input money
+int moneyPay = Convert.ToInt32(Console.ReadLine());
+
+////////////////DECLARE VALUE USE FOR CHANGE
+int moneyChange;
+ ////CHECK IF USER MONEY LESS THAN TOTAL PRICE
+ if(moneyPay < amountOrder*PriceArray[checkname]){
+     //Method use if money user input less than total price
+NoEnoughMoney();
+ }
+ ///if money user input greater than total price do this state
+ else if(moneyPay >= amountOrder*PriceArray[checkname]){
+     ///////////////////////CALCULATE CHANGE///////////////////
+//ChangeBill(int[] PriceArray,int moneyPay,int amount,int checkname)
+ChangeBill(PriceArray,moneyPay,amountOrder,checkname);
+ //decrease stock following user input 
+ StockArray[checkname]-=amountOrder;
+ }
+ Console.WriteLine("_____________________________________________");
+}
+//if stock less than user order do this state
+else if (StockArray[checkname] < amountOrder && amountOrder > 0){
+   //Method show no stock
+   NoStock();
+}
+//If no choice do this
+else{
+    //Method Show Something wrong
+SomethingWrong();
+ }
+}
+
+ ///CATCH Error if got any error
+}
+catch (Exception ex)
+{
+    //Method show something wrong
+SomethingWrong();
+ }
+}
+    
+    
+    
+    
+    ///////////////////////////////START PROGRAM HERE
+    public static void Main(string[] args)
+    {   
+        //Category
+        string[] CategoryMenu = {"FOOD","DRINK","DESSERT"};
+         //Total Stock ARRAY
+        int[] StockTotal = new int[CategoryMenu.Length];
+        //ITEM DEFAULT IN FOOD 
+        string[] FoodArray = { "FRIEDRICE", "BURGER", "BREAD","SKINCHICKEN" };////YOU CAN ADD MENU IN HERE AND ADD PRICE
+        ///////////////////PRICE
+        int[] MoneyFoodArray = { 50, 45, 30,30 };
+        ///////////////////STOCK AMOUNT DEFAULT
+        int[] StockFoodArray ={5,4,6,3};
+        //////Total STOCK
+        int TotalFoodStock = 0;
+        ////////////////////UPDATE CURRENT TOTAL FOOD STOCK 
+        for(int i=0;i<StockFoodArray.Length;i++){
+            TotalFoodStock+=StockFoodArray[i];
+            StockTotal[0] = TotalFoodStock;
+        }
+        //ITEM DEFAULT IN DRINK
+        string[] DrinkArray = { "WATER", "COCACOLA", "COFFEE" };////YOU CAN ADD MENU IN HERE AND ADD PRICE
+        ///////////////////PRICE
+        int[] MoneyDrinkArray = { 7, 12, 30 };
+        ////////////////////STOCK AMOUNT DEFAUlT
+        int[] StockDrinkArray={10,8,6};
+        /////Total STOCK
+         int TotalDrinkStock = 0;
+        ////////////////////UPDATE CURRENT TOTAL DRINK STOCK 
+        for(int i=0;i<StockDrinkArray.Length;i++){
+            TotalDrinkStock+=StockDrinkArray[i];
+            StockTotal[1] = TotalDrinkStock;
+        }
+        //ITEM DEFAULT IN DESSERT
+        string[] DessertArray = {"ICECREAM","CAKE","CANDY"};////YOU CAN ADD MENU IN HERE AND ADD PRICE
+        ////////////////////PRICE
+        int[] MoneyDessertArray = {15,50,20};
+        /////////////////////STOCK AMOUNT DEFAULT
+        int[] StockDessertArray = {8,5,16};
+        /////////////////////TOTAL STOCK
+         int TotalDessertStock = 0;
+        ////////////////////UPDATE CURRENT TOTAL FOOD STOCK 
+        for(int i=0;i<StockDessertArray.Length;i++){
+            TotalDessertStock+=StockDessertArray[i];
+            StockTotal[2] = TotalDessertStock;
+        }
+       
+        
+//KEY FOR ADMIN----------------------------------------------------------
+        ////////////////USE THIS KEY IN FIRST PAGE 
+        string AdminKeyPass = "ADMINKEY";
+
+//MENU FIRST APPEAR WHEN RUN ------------------------------------------
+//SET Repeat for Loop
+bool repeatouter = true;
+//use do_while
+do{
+Console.WriteLine(" _______________Vending Machine_______________");
+Console.WriteLine("                                             ");
+Console.WriteLine("                   WELCOME                   ");
+Console.WriteLine("     Please choose Menu to continue =-=      ");
+Console.WriteLine("   1.ORDER MENU                              ");
+Console.WriteLine("   2.LIST MENU                               ");
+Console.WriteLine("   3.EXIT                                    ");
+Console.WriteLine("                                             ");
+Console.WriteLine("_____________________________________________");
+
+        Console.WriteLine();
+Console.Write("Choose menu to continue(Number or Text) : ");
+////////////////////////////This Line use Method to get user input and filter some space,make text to upper case
+string ChooseMenuTrueValue = InputData();
+
+    //MENU1--------------------------------------------------------------
+////Check Value from user input if value is ordermenu or 1 do this if
+if (ChooseMenuTrueValue == "ORDERMENU" || ChooseMenuTrueValue == "1")
+        {
+            Console.WriteLine();
+//    INTERFACE MENU///////////////////////////////////////////
+Console.WriteLine(" _________________ORDER MENU__________________");
+Console.WriteLine("                                             ");
+for(int i =0;i<CategoryMenu.Length;i++){
+    Console.WriteLine($"   {i+1}.{CategoryMenu[i]}                                    ");
+}
+Console.WriteLine("                                             ");
+Console.WriteLine("      Please choose Menu to continue -=-     ");
+Console.WriteLine("_____________________________________________");
+Console.WriteLine();
+Console.Write("Choose menu category to order(Number or Text) : ");
+/////////////////// GET VALUE FROM METHOD//////////////////////////
+string TrueValueChooseOrder = InputData();
+Console.WriteLine();
+////Check Value from user input if value is FOOD or 1 do this if
+if (TrueValueChooseOrder == "FOOD" || TrueValueChooseOrder == "1")
+{
+ CategoryChoice("FOOD",FoodArray,MoneyFoodArray,StockFoodArray);
+}
+//////////////////////// Choose DRINK CATEGORY //////////////////////
+else if (TrueValueChooseOrder == "DRINK" || TrueValueChooseOrder == "2")
+{
+   CategoryChoice("DRINK",DrinkArray,MoneyDrinkArray,StockDrinkArray);
+}
+///                      DESSERT MENU                
+else if (TrueValueChooseOrder == "DESSERT" || TrueValueChooseOrder == "3")
+{
+CategoryChoice("DESSERT",DessertArray,MoneyDessertArray,StockDessertArray);
+}
+
+else{
+BackToMenu();
+}
+}
+
+// MENU2 -----------------------------------------------------------
+else if (ChooseMenuTrueValue == "LISTMENU" || ChooseMenuTrueValue == "2")
+{
+    Console.WriteLine();
+//    INTERFACE MENU///////////////////////////////////////////
+Console.WriteLine(" __________________LIST MENU__________________");
+Console.WriteLine("                                             ");
+for(int i =0;i<CategoryMenu.Length;i++){
+    Console.WriteLine($"   {i+1}.{CategoryMenu[i].PadRight(30)}x{StockTotal[i]} ");
+}
+
+Console.WriteLine("                                             ");
+Console.WriteLine("      Please Choose Category to See          ");
+Console.WriteLine("_____________________________________________");
+Console.WriteLine();
+Console.Write("Enter Number Or Text in Menu to go : ");
+////////////////////////////GET INPUT FROM USER AND DELETE SPACE AND TURN IT TO UPPERTEXT
+string getInputListCategory = Console.ReadLine().Replace(" ",string.Empty).ToUpper();
+///////////////////////////FOOD CHOOSE///////////////////
+if(getInputListCategory=="FOOD" || getInputListCategory=="1"){
+    ListCategory("FOOD",FoodArray,MoneyFoodArray,StockFoodArray);
+
+////////////////////////////GET INPUT FROM USER 
+string keygobackfood = Console.ReadLine();
+if (keygobackfood=="" || keygobackfood != null){
+    Console.WriteLine();
+BackToMenu();
+}
+    
+}
+
+//////////////////////////////////////////////////////////////////
+
+else if(getInputListCategory=="DRINK" || getInputListCategory=="2"){
+ListCategory("DRINK",DrinkArray,MoneyDrinkArray,StockDrinkArray);
+///////////////////////////GET INPUT FROM USER///////////////////////
+string keygobackdrink = Console.ReadLine();
+if (keygobackdrink=="" || keygobackdrink != null){
+    Console.WriteLine();
+BackToMenu();
+}
+    
+}
+/////////////////////////////////////////////////////////////////
+
+else if(getInputListCategory=="DESSERT" || getInputListCategory=="3"){
+ListCategory("DESSERT",DessertArray,MoneyDessertArray,StockDessertArray);
+///////////////////////GET INPUT FROM USER
+string keygobackdessert = Console.ReadLine();
+if (keygobackdessert=="" || keygobackdessert != null){
+    Console.WriteLine();
+BackToMenu();
+}
+    
+}
+else{
+BackToMenu();
+}
+///////////// LIST COMPONENTS////////////////////////////////////
+
+
+
+}
+//EXIT MENU --------------------------------------------------------
+else if (ChooseMenuTrueValue == "EXIT" || ChooseMenuTrueValue == "3")
+{
+    Console.WriteLine();
+Console.WriteLine("|/////////////////////////////////////////////|");
+Console.WriteLine("|             Thank for use -=-!              |");
+Console.WriteLine("|/////////////////////////////////////////////|");
+repeatouter = false;
+}
+//ADMIN 
+/////////////////////////CHECK KEY ADMIN///////////////////
+else if (ChooseMenuTrueValue == AdminKeyPass.ToUpper()){
+     bool ExitAdmin = true;
+     /////////////////DO WHILE FOR REPEAT
+    do{
+       
+ Console.WriteLine(" ___________________________________ADMIN_____________________________________ ");
+ Console.WriteLine("                                                                             ");
+ Console.WriteLine("                                   STOCK                                     ");
+Console.WriteLine($"        1.FOOD                                               x{TotalFoodStock} ");
+Console.WriteLine($"        2.DRINK                                              x{TotalDrinkStock}");
+Console.WriteLine($"        3.DESSERT                                            x{TotalDessertStock}");
+ Console.WriteLine(" -----------------------------------------------------------------------------");
+ Console.WriteLine("|                                  COMMAND                                    |");
+ Console.WriteLine("|   - goto |___| - Select category to see the stock(goto food)                |");
+ Console.WriteLine("|   - back       - Back to previous page                                      |");
+ Console.WriteLine("|   - exit       - Exit ADMIN PAGE                                            |");
+ Console.WriteLine("|                                                                             |");
+ Console.WriteLine("|                                                                             |");
+ Console.WriteLine("|_____________________________________________________________________________|");
+ Console.WriteLine();
+    Console.Write("Enter command : ");
+    //////////////////////////////////////TO GET COMMAND
+string CommandAdmin = Console.ReadLine().Replace(" ",string.Empty).ToLower();
+if (CommandAdmin == "gotofood"){
+    bool FoodLoopSTOCK = true;
+    do{
+AdminStateShowCategory(FoodArray,StockFoodArray);
+
+ string CommandFoodAdmin = Console.ReadLine().Replace(" ",string.Empty).ToLower();
+ 
+ if(CommandFoodAdmin=="select"){
+ AdminStategoto_select("FOOD",FoodArray,StockFoodArray);
+  TotalFoodStock =0;
+for(int i=0;i<StockFoodArray.Length;i++){
+            TotalFoodStock+=StockFoodArray[i];
+        }
+
+ }/////SELECT FOOD
+else if(CommandFoodAdmin == "back"){
+    FoodLoopSTOCK = false;
+}
+else if(CommandFoodAdmin == "exit"){
+    FoodLoopSTOCK = false;
+    ExitAdmin = false;
+}
+else{
+    Console.WriteLine("Command Not Found!!");
+}
+}while(FoodLoopSTOCK != false);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+}//////GOTO FOOD
+else if(CommandAdmin == "gotodrink"){
+    bool DrinkLoopSTOCK = true;
+    do{
+AdminStateShowCategory(DrinkArray,StockDrinkArray);
+ string CommandDrinkAdmin = Console.ReadLine().Replace(" ",string.Empty).ToLower();
+ if(CommandDrinkAdmin=="select"){
+AdminStategoto_select("DRINK",DrinkArray,StockDrinkArray);
+  TotalDrinkStock =0;
+for(int i=0;i<StockDrinkArray.Length;i++){
+            TotalDrinkStock+=StockDrinkArray[i];
+        }
+ }/////SELECT DRINK
+ else if(CommandDrinkAdmin == "back"){
+    DrinkLoopSTOCK = false;
+}
+else if(CommandDrinkAdmin == "exit"){
+    DrinkLoopSTOCK = false;
+    ExitAdmin = false;
+}
+
+}while(DrinkLoopSTOCK != false);
+}
+else if(CommandAdmin == "gotodessert"){
+    bool DessertLoopSTOCK = true;
+    do{
+AdminStateShowCategory(DessertArray,StockDessertArray);
+ string CommandDessertAdmin = Console.ReadLine().Replace(" ",string.Empty).ToLower();
+ if(CommandDessertAdmin=="select"){
+AdminStategoto_select("Dessert",DessertArray,StockDessertArray);
+  TotalDessertStock =0;
+for(int i=0;i<StockDessertArray.Length;i++){
+            TotalDessertStock+=StockDessertArray[i];
+        }
+ }/////SELECT DESSERT
+ else if(CommandDessertAdmin == "back"){
+    DessertLoopSTOCK = false;
+}
+else if(CommandDessertAdmin == "exit"){
+    DessertLoopSTOCK = false;
+    ExitAdmin = false;
+}
+}while(DessertLoopSTOCK != false);
+}
+
+else if(CommandAdmin == "back"){
+    ExitAdmin = false;
+}
+else if(CommandAdmin == "exit"){
+    ExitAdmin = false;
+}
+else{
+    Console.WriteLine("Command not found!!");
+}
+}while(ExitAdmin != false);
+
+
+
+
+}
+
+else
+{
+Console.WriteLine();
+Console.WriteLine(" _____________Hey What are you doing__________");
+Console.WriteLine("|                                             |");
+Console.WriteLine("|        PLEASE ENTER ONLY 1-3 OR TEXT        |");
+Console.WriteLine("|             Try to do again |=-=|           |");
+Console.WriteLine("|                                             |");
+Console.WriteLine("|_____________________________________________|");
+Console.WriteLine();
+}
+
+}while(repeatouter==true);
+
+
+    }
+}
