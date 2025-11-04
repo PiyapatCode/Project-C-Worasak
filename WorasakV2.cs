@@ -454,6 +454,21 @@ else if (ChooseMenuTrueValue == "EXIT" || ChooseMenuTrueValue == "3")
 Console.WriteLine("|/////////////////////////////////////////////|");
 Console.WriteLine("|             Thank for use -=-!              |");
 Console.WriteLine("|/////////////////////////////////////////////|");
+Console.WriteLine();     
+Console.WriteLine();
+Console.WriteLine("             ______      ______      ____________      ______    ______");
+Console.WriteLine("            |      |    |      |    |            |     \\     \\  /     /");     
+Console.WriteLine("            |      |    |      |    |     _______|      \\     \\/     / ");
+Console.WriteLine("            |      |____|      |    |    |_______        \\          / ");
+Console.WriteLine("            |                  |    |            |        \\        / ");
+Console.WriteLine("            |       ____       |    |     _______|        /        \\ ");
+Console.WriteLine("            |      |    |      |    |    |_______        /          \\ ");
+Console.WriteLine("            |      |    |      |    |            |      /     /\\     \\ ");
+Console.WriteLine("            |______|    |______|    |____________|     /_____/  \\_____\\ ");
+Console.WriteLine();
+Console.WriteLine("          ================================================================= ");
+Console.WriteLine("          \\_______________________________________________________________/     ");
+
 repeatouter = false;
 }
 //ADMIN 
