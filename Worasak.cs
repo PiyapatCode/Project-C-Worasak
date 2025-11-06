@@ -39,6 +39,8 @@ public class WorasakProject
         {
         /////////////////////i+1 because forloop start from 0 
         Console.WriteLine($"   {i + 1}.{Category[i].Name.PadRight(15)}{Category[i].Price} BAHT{"".PadRight(8)}STOCK: {Category[i].Stock}{"".PadRight(2)}");}
+        if (Category.Count == 0){
+        Console.WriteLine("               | No menu in here |           ");}
         Console.WriteLine("                                             ");
         Console.WriteLine($"      Please choose {CategoryName} to continue -=-");
         Console.WriteLine("_____________________________________________");
@@ -121,7 +123,9 @@ public class WorasakProject
     for (int i = 0; i < Category.Count; i++)
     {
      Console.WriteLine($"   {i + 1}.{Category[i].Name.PadRight(15)}{Category[i].Price} BAHT{"".PadRight(8)}STOCK: {Category[i].Stock}{"".PadRight(2)}");}
-
+if(Category.Count==0){
+    Console.WriteLine("               | No menu in here |           ");
+}
     Console.WriteLine("                                             ");
     Console.WriteLine("      Enter Any key to go Back       -=-     ");
     Console.WriteLine("_____________________________________________");
@@ -132,6 +136,10 @@ public class WorasakProject
     Console.WriteLine(" ___________________________________ADMIN_____________________________________ ");
     Console.WriteLine("                                                                             ");
     Console.WriteLine("                                   STOCK                                     ");
+    if(Category.Count==0){
+    Console.WriteLine("                            | No Menu in here |");
+    Console.WriteLine("                        | ADD MENU USE ADD COMMAND |");
+    }
     for(int i=0;i<Category.Count;i++){
     Console.WriteLine($"         {i+1}.{Category[i].Name.PadRight(50)} x{Category[i].Stock}");
      }
