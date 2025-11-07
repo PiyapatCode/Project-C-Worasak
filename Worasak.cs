@@ -148,8 +148,9 @@ if(Category.Count==0){
     Console.WriteLine("|   - select     - Select menu to edit the stock                              |");
     Console.WriteLine("|   - back       - Back to previous page                                      |");
     Console.WriteLine("|   - add        - Add menu in stock                                          |");
+    Console.WriteLine("|   - del        - Delete menu in stock                                       |");
     Console.WriteLine("|   - exit       - Exit ADMIN PAGE                                            |");
-    Console.WriteLine("|                                                                             |");
+
     Console.WriteLine("|                                                                             |");
     Console.WriteLine("|_____________________________________________________________________________|");
     Console.WriteLine();
@@ -297,13 +298,61 @@ catch (Exception ex)
 SomethingWrong();
  }
 }
-    
+public static void DeleteMenu(List<StorageMenuItem> Category){
+       string delCommand;
+       char confirm;
+       int findIndex;
+Console.WriteLine(" ___________________________________ADMIN_____________________________________ \n");
+if(Category.Count == 0){
+Console.WriteLine("                                  No Menu in here ");
+}
+for(int i =0;i<Category.Count;i++){
+Console.WriteLine($"         {i+1}.{Category[i].Name.PadRight(50)}x{Category[i].Stock}");
+}
+ Console.WriteLine(" -----------------------------------------------------------------------------\n");
+  if(Category.Count > 0){
+
+
+ try{
+Console.WriteLine("         Type cancel to exit del ");
+Console.Write("         Choose menu to delete(Text) : ");
+delCommand = InputData();
+if(delCommand != "cancer"){
+
+Console.Write($"         Are you sure to delete {delCommand}? (y/n) : ");
+confirm = char.Parse(Console.ReadLine());
+if(confirm == 'y'){
+findIndex =  Category.FindIndex(item => item.Name.ToUpper() == delCommand.ToUpper());
+Category.RemoveAt(findIndex);
+Console.WriteLine($"         Delete {delCommand} Success!");
+ Console.WriteLine(" _____________________________________________________________________________");
+}
+else{
+Console.WriteLine("      ");
+ Console.WriteLine(" _____________________________________________________________________________");
+}
+}
+}catch(ArgumentOutOfRangeException){
+    Console.WriteLine("\nNo menu choose to delete\n");
+     Console.WriteLine(" _____________________________________________________________________________");
+}
+catch(FormatException){
+    Console.WriteLine("\nEnter Only y or n !!");
+     Console.WriteLine(" _____________________________________________________________________________");
+}
+}
+else{
+    Console.WriteLine("         ADD MENU BEFORE DELETE !!!");
+     Console.WriteLine(" _____________________________________________________________________________\n");
+}
+}
     
     
     
     ///////////////////////////////START PROGRAM HERE
     public static void Main(string[] args)
     {   
+        
     List<StorageMenuItem> FoodListMenu = new List<StorageMenuItem>(){};
     List<StorageMenuItem> DrinkListMenu = new List<StorageMenuItem>(){};
     List<StorageMenuItem> DessertListMenu = new List<StorageMenuItem>(){};
@@ -349,6 +398,7 @@ SomethingWrong();
 bool repeatouter = true;
 //use do_while
 do{
+    
 Console.WriteLine(" _______________Vending Machine_______________");
 Console.WriteLine("                                             ");
 Console.WriteLine("                   WELCOME                   ");
@@ -515,6 +565,7 @@ else if (ChooseMenuTrueValue == AdminKeyPass.ToUpper()){
      bool ExitAdmin = true;
      /////////////////DO WHILE FOR REPEAT
     do{
+ 
         string NameMenu;
 int PriceMenu;
 int StockMenu;
@@ -522,9 +573,9 @@ int StockMenu;
  Console.WriteLine(" ___________________________________ADMIN_____________________________________ ");
  Console.WriteLine("                                                                             ");
  Console.WriteLine("                                   STOCK                                     ");
-Console.WriteLine($"        1.FOOD                                               x{TotalFoodStock} ");
-Console.WriteLine($"        2.DRINK                                              x{TotalDrinkStock}");
-Console.WriteLine($"        3.DESSERT                                            x{TotalDessertStock}");
+Console.WriteLine($"        1.FOOD                                               x{StockTotal[0]} ");
+Console.WriteLine($"        2.DRINK                                              x{StockTotal[1]}");
+Console.WriteLine($"        3.DESSERT                                            x{StockTotal[2]}");
  Console.WriteLine(" -----------------------------------------------------------------------------");
  Console.WriteLine("|                                  COMMAND                                    |");
  Console.WriteLine("|   - goto |___| - Select category to see the stock(goto food)                |");
@@ -584,6 +635,17 @@ NameMenu = InputData();
  }
   
 }
+else if (CommandFoodAdmin == "del" ){
+    TotalFoodStock = 0;
+   DeleteMenu(FoodListMenu);
+
+            for(int i =0;i<FoodListMenu.Count;i++){
+            TotalFoodStock+=FoodListMenu[i].Stock;}
+     
+            StockTotal[0] = TotalFoodStock;
+
+}
+
 else if(CommandFoodAdmin == "back"){
     FoodLoopSTOCK = false;
 }
@@ -648,6 +710,17 @@ NameMenu = InputData();
  }
   
 }
+else if(CommandDrinkAdmin == "del"){
+    DeleteMenu(DrinkListMenu);
+          TotalDrinkStock = 0;
+        ////////////////////UPDATE CURRENT TOTAL DRINK STOCK 
+        for(int i=0;i<DrinkListMenu.Count;i++){
+            TotalDrinkStock+=DrinkListMenu[i].Stock;}
+            StockTotal[1] = TotalDrinkStock;
+        
+
+
+}
  else if(CommandDrinkAdmin == "back"){
     DrinkLoopSTOCK = false;
 }
@@ -703,6 +776,15 @@ NameMenu = InputData();
      }
  }
   
+}
+else if(CommandDessertAdmin == "del"){
+    DeleteMenu(DessertListMenu);
+
+         TotalDessertStock = 0;
+        ////////////////////UPDATE CURRENT TOTAL FOOD STOCK 
+        for(int i=0;i<DessertListMenu.Count;i++){
+            TotalDessertStock+=DessertListMenu[i].Stock;}
+            StockTotal[2] = TotalDessertStock;
 }
  else if(CommandDessertAdmin == "back"){
     DessertLoopSTOCK = false;
