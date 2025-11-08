@@ -588,7 +588,8 @@ Console.WriteLine($"        3.DESSERT                                           
     Console.Write("Enter command : ");
     //////////////////////////////////////TO GET COMMAND
 string CommandAdmin = Console.ReadLine().Replace(" ",string.Empty).ToLower();
-if (CommandAdmin == "gotofood"){
+switch (CommandAdmin){
+case "gotofood":
     bool FoodLoopSTOCK = true;
     do{
 AdminStateShowCategory(FoodListMenu);
@@ -664,8 +665,9 @@ else{
  
  
  
-}//////GOTO FOOD
-else if(CommandAdmin == "gotodrink"){
+break;//////GOTO FOOD
+case "gotodrink":
+
     bool DrinkLoopSTOCK = true;
     do{
 AdminStateShowCategory(DrinkListMenu);
@@ -730,8 +732,9 @@ else if(CommandDrinkAdmin == "exit"){
 }
 
 }while(DrinkLoopSTOCK != false);
-}
-else if(CommandAdmin == "gotodessert"){
+break;
+case "gotodessert":
+
     bool DessertLoopSTOCK = true;
     do{
 AdminStateShowCategory(DessertListMenu);
@@ -794,16 +797,19 @@ else if(CommandDessertAdmin == "exit"){
     ExitAdmin = false;
 }
 }while(DessertLoopSTOCK != false);
-}
+break;
+case "back":
 
-else if(CommandAdmin == "back"){
     ExitAdmin = false;
-}
-else if(CommandAdmin == "exit"){
+break;
+case "exit":
+
     ExitAdmin = false;
-}
-else{
+break;
+default:
+
     Console.WriteLine("Command not found!!");
+    break;
 }
 }while(ExitAdmin != false);
 
